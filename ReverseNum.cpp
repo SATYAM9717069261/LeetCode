@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<bits/std++.h>
 using namespace std;
 class Solution{
     public: int solution(int num){
