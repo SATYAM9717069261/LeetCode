@@ -5,6 +5,7 @@ bool compare(vector<int> first, vector<int> second){
         return true;
     return false;
 }
+
 class Solution{
     private: void print(vector<vector<int>>& intervals){
             for(vector<int>i: intervals){
