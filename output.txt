@@ -1,61 +1,33 @@
-1000000005 1 return =>500000003 =>1
- ANS =>500000003
-500000003 1 return =>250000002 =>1
- ANS =>250000002
-250000002 1 return =>125000001 =>1
- ANS =>125000001
-125000001 1 return =>62500001 =>1
- ANS =>62500001
-62500001 1 return =>31250001 =>1
- ANS =>31250001
-31250001 1 return =>15625001 =>1
- ANS =>15625001
-15625001 1 return =>7812501 =>1
- ANS =>7812501
-7812501 1 return =>3906251 =>1
- ANS =>3906251
-3906251 1 return =>1953126 =>1
- ANS =>1953126
-1953126 1 return =>976563 =>1
- ANS =>976563
-976563 1 return =>488282 =>1
- ANS =>488282
-488282 1 return =>244141 =>1
- ANS =>244141
-244141 1 return =>122071 =>1
- ANS =>122071
-122071 1 return =>61036 =>1
- ANS =>61036
-61036 1 return =>30518 =>1
- ANS =>30518
-30518 1 return =>15259 =>1
- ANS =>15259
-15259 1 return =>7630 =>1
- ANS =>7630
-7630 1 return =>3815 =>1
- ANS =>3815
-3815 1 return =>1908 =>1
- ANS =>1908
-1908 1 return =>954 =>1
- ANS =>954
-954 1 return =>477 =>1
- ANS =>477
-477 1 return =>239 =>1
- ANS =>239
-239 1 return =>120 =>1
- ANS =>120
-120 1 return =>60 =>1
- ANS =>60
-60 1 return =>30 =>1
- ANS =>30
-30 1 return =>15 =>1
+ CALL =>1 971 9 72
+			 finishLast =>1Numlast =>2div Fact =>10
+			 finishLast =>7Numlast =>7div Fact =>10
+			 finishLast =>9Numlast =>0div Fact =>10
+ AT =>0 =>7
+ AT =>1 =>9
  ANS =>15
-15 1 return =>8 =>1
- ANS =>8
-8 1 return =>4 =>1
- ANS =>4
-4 1 return =>2 =>1
- ANS =>2
-2 1 return =>1 =>0
- ANS =>2
+ CALL =>1 6000 4 124
+			 finishLast =>0Numlast =>4div Fact =>10
+			 finishLast =>0Numlast =>2div Fact =>10
+			 finishLast =>0Numlast =>1div Fact =>10
+			 finishLast =>6Numlast =>0div Fact =>10
+ AT =>0 =>4
+ ANS =>3
+ CALL =>15 215 6 10
+			 finishLast =>5Numlast =>5div Fact =>10
+			 finishLast =>1Numlast =>1div Fact =>10
+			 finishLast =>2Numlast =>0div Fact =>10
+ AT =>0 =>2
+ ANS =>1
+ CALL =>1000 2000 4 3000
+ ANS =>0
+ CALL =>141 148 9 9
+			 finishLast =>8Numlast =>1div Fact =>10
+			 finishLast =>4Numlast =>4div Fact =>10
+			 finishLast =>1Numlast =>1div Fact =>10
+ ANS =>-1
+ CALL =>1 11 5 10
+			 finishLast =>1Numlast =>0div Fact =>10
+			 finishLast =>1Numlast =>1div Fact =>10
+ AT =>0 =>1
+ AT =>1 =>1
  ANS =>2
