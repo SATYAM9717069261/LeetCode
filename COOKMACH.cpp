@@ -1,27 +1,32 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Solution{
-    public: bool sol(vector<int>& data, int limit){
-                int maxEle = 0;
-                bool flag = true;
-                for(int i=0;i<data.size();i++){
-                    if(maxEle>data[i] && (maxEle+data[i]) > limit)
-                        flag = false;
-                    maxEle = max(maxEle,data[i]);
-                }
-                return flag;
+pair<int,int> solution(vector<int>& arr, int k, int n){
+    sort(arr.begin(),arr.end());
+    int minDiff = INT_MAX;
+    int count = 0;
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            int currDiff = abs(arr[i]+arr[j]-k);
+            if(currDiff < minDiff){
+                minDiff = currDiff;
+                count=1;
+            }else if (currDiff == minDiff) {
+                count++;
             }
-};
+        }
+    }
+    return {minDiff,count};
+}
 int main(){
     int test; cin>>test;
     while(test--){
-        int num; cin>>num;
-        int a; cin>>a;
-        vector<int> data(num,0);
-        for(int i=0;i<num;i++) cin>>data[i];
-        Solution sl;
-        cout<<(sl.sol(data,a) ? "YES":"NO")<<endl;
+        int n,k; cin>>n>>k;
+        vector<int> arr(n,0);
+        for(int i=0;i<n;i++)
+            cin>>arr[i];
+       pair<int,int> ans =  solution(arr,k,n);
+       cout<<ans.first<<" "<<ans.second<<endl;
     }
     return 0;
 }

@@ -1,33 +1,41 @@
- CALL =>1 971 9 72
-			 finishLast =>1Numlast =>2div Fact =>10
-			 finishLast =>7Numlast =>7div Fact =>10
-			 finishLast =>9Numlast =>0div Fact =>10
- AT =>0 =>7
- AT =>1 =>9
- ANS =>15
- CALL =>1 6000 4 124
-			 finishLast =>0Numlast =>4div Fact =>10
-			 finishLast =>0Numlast =>2div Fact =>10
-			 finishLast =>0Numlast =>1div Fact =>10
-			 finishLast =>6Numlast =>0div Fact =>10
- AT =>0 =>4
- ANS =>3
- CALL =>15 215 6 10
-			 finishLast =>5Numlast =>5div Fact =>10
-			 finishLast =>1Numlast =>1div Fact =>10
-			 finishLast =>2Numlast =>0div Fact =>10
- AT =>0 =>2
- ANS =>1
- CALL =>1000 2000 4 3000
- ANS =>0
- CALL =>141 148 9 9
-			 finishLast =>8Numlast =>1div Fact =>10
-			 finishLast =>4Numlast =>4div Fact =>10
-			 finishLast =>1Numlast =>1div Fact =>10
- ANS =>-1
- CALL =>1 11 5 10
-			 finishLast =>1Numlast =>0div Fact =>10
-			 finishLast =>1Numlast =>1div Fact =>10
- AT =>0 =>1
- AT =>1 =>1
- ANS =>2
+use std::io;
+
+fn solution(c: u32) -> u32 {
+    let mut d: u32 = 0;
+    let mut temp: u32 = 1;
+    while temp <= c {
+        temp *= 2;
+        d += 1;
+    }
+
+    // c= 0110(10) -> 1,2,4,8 -> 4
+
+    let mut a: u32 = 1 << (d - 1);
+    let b: u32 = c ^ a;
+
+    for i in 0..(d - 1) {
+        if (c >> i) & 1 == 1 {
+            a &= !(1 << i);
+            b |= 1 << i;
+        } else {
+            a |= 1 << i;
+            b |= 1 << i;
+        }
+    }
+    a *= b;
+    return a;
+}
+
+fn main() {
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).expect("Input Error");
+    let test_cases: u32 = inp.trim().parse().expect("PARSING ERROR");
+
+    for _ in 0..test_cases {
+        inp.clear();
+        io::stdin().read_line(&mut inp).expect("Input Error");
+        let num: u32 = inp.trim().parse().expect("");
+        let ans: u32 = solution(num);
+        println!("{}", ans);
+    }
+}
