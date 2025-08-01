@@ -1,85 +1,59 @@
+use std::cmp::{max, min};
 use std::io;
-fn findstartOnes(mut num: u64) -> u8 {
-    let mut pos: u8 = 0;
-    for i in 0..64 {
-        if ((num >> i) ^ 0) == 1 {
-            break;
+
+const LIMIT: u64 = 1_000_000_007;
+
+fn solution(mut len: u64, mut arr: Vec<u64>) {
+    let mut target: i64 = len as i64;
+    for i in 1..=10 {
+        target = target - arr[(10 - i) as usize] as i64;
+        if target >= 0 {
+            continue;
+        } else {
+            print!("{}", 10 - i);
+            return;
         }
-        pos += 1;
     }
-    return pos;
+    print!("0");
 }
 
-fn pow(mut n: u8, mut p: u8) -> u64 {
-    let mut base = n as u64;
-    let mut ans: u64 = 1;
+fn input() {
+    let mut inp: String = String::new();
+    inp.clear();
+    io::stdin().read_line(&mut inp).expect("");
+    let arr1: Vec<u64> = inp
+        .trim()
+        .split_whitespace()
+        .map(|data| data.parse().expect(""))
+        .collect();
+    print!("arr => {:?}", arr1);
+    // let mut iter = inp.trim().split_whitespace();
+    // let (a, b, p, q): (u64, u64, u64, u64) = (
+    //     iter.next().expect("").parse().expect(""),
+    //     iter.next().expect("").parse().expect(""),
+    //     iter.next().expect("").parse().expect(""),
+    //     iter.next().expect("").parse().expect(""),
+    // );
 
-    while p != 0 {
-        if p % 2 == 1 {
-            ans *= base;
-        }
-        base *= base;
-        p /= 2;
-    }
-    ans
+    inp.clear();
+    io::stdin().read_line(&mut inp).expect("");
+    let len: u64 = inp.trim().parse().expect("");
+
+    //inp.clear();
+    //io::stdin().read_line(&mut inp).expect("");
+    //let arr2: Vec<u64> = inp
+    //    .trim()
+    //    .split_whitespace()
+    //    .map(|data| data.parse().expect(""))
+    //    .collect();
+    solution(len, arr1);
 }
-
-fn twoPow(mut n: u8) -> u64 {
-    let mut ans: u64 = 1;
-    let mut i = 1;
-    while n >= i {
-        ans = (ans << 1) ^ 1;
-        i += 1;
-    }
-    return ans;
-}
-
-fn solution(a: u64, b: u64, n: u64) -> i8 {
-    if a == b {
-        return 0;
-    }
-    let x: u64 = a ^ b;
-    println!(
-        "x= > {} {} {} {}",
-        x,
-        n,
-        findstartOnes(n),
-        twoPow(findstartOnes(n))
-    );
-    if x > 0 && x <= (n - 1) {
-        return 1;
-    } else if n > 1 && twoPow(findstartOnes(x)) == twoPow(findstartOnes(n)) {
-        return 2;
-    } else {
-        return -1;
-    }
-}
-
 fn main() {
-    let mut inp = String::new();
-    io::stdin().read_line(&mut inp).expect("Input Error");
-    let test_cases: u64 = inp.trim().parse().expect("PARSING ERROR");
-
-    for _ in 0..test_cases {
-        // inp.clear();
-        // io::stdin().read_line(&mut inp).expect("Input Error");
-        // let len: u64 = inp.trim().parse().expect("");
-
-        // inp.clear();
-        // io::stdin().read_line(&mut inp).expect("Input Error");
-        // let mut iter = inp.trim().split_whitespace();
-        // let arr1: Vec<u64> = iter.map(|data| data.parse().expect("")).collect();
-
-        inp.clear();
-        io::stdin().read_line(&mut inp).expect("Input Error");
-        let mut iter = inp.trim().split_whitespace();
-        let (a, b, n): (u64, u64, u64) = (
-            iter.next().expect("").parse().expect(""),
-            iter.next().expect("").parse().expect(""),
-            iter.next().expect("").parse().expect(""),
-        );
-
-        let ans: i8 = solution(a, b, n);
-        println!("{}", ans);
+    let mut inp: String = String::new();
+    io::stdin().read_line(&mut inp).expect("Input ");
+    let test: u64 = inp.trim().parse().expect("");
+    for _ in 0..test {
+        input();
+        println!("");
     }
 }

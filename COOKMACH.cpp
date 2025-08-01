@@ -1,32 +1,44 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <climits>
 using namespace std;
 
-pair<int,int> solution(vector<int>& arr, int k, int n){
-    sort(arr.begin(),arr.end());
-    int minDiff = INT_MAX;
-    int count = 0;
-    for(int i=0;i<n;i++){
-        for(int j=i+1;j<n;j++){
-            int currDiff = abs(arr[i]+arr[j]-k);
-            if(currDiff < minDiff){
-                minDiff = currDiff;
-                count=1;
-            }else if (currDiff == minDiff) {
-                count++;
-            }
+int findMinCost(const vector<int>& A) {
+    int N = A.size();
+    int min_cost = INT_MAX;
+
+    for (int i = 1; i < N - 1; ++i) {
+        int left_len = A[i];
+        int right_len = A[i-1];
+        if(left_len *2 >= N-1 && right_len*2 >= N-1){
+            int cost = A[i] + A[i + 1];
+            min_cost = min (min_cost,cost);
         }
     }
-    return {minDiff,count};
+
+    if (A[0] >= N-1)
+        min_cost = min(min_cost, A[0]);
+
+    if (A[N - 1] >= N-1)
+        min_cost = min(min_cost, A[N - 1]);
+
+    return min_cost;
 }
-int main(){
-    int test; cin>>test;
-    while(test--){
-        int n,k; cin>>n>>k;
-        vector<int> arr(n,0);
-        for(int i=0;i<n;i++)
-            cin>>arr[i];
-       pair<int,int> ans =  solution(arr,k,n);
-       cout<<ans.first<<" "<<ans.second<<endl;
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        int N;
+        cin >> N;
+
+        vector<int> A(N);
+        for (int i = 0; i < N; ++i)
+            cin >> A[i];
+
+        cout << findMinCost(A) << "\n";
     }
+
     return 0;
 }
