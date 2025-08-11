@@ -1,66 +1,50 @@
 /**https://www.codechef.com/practice/course/2to3stars/LP2TO303/problems/MINEAT */
 use std::io;
-fn possibleCheck(len: u64, hr: u64, arr: &Vec<u64>, val: u64) -> bool {
-    let mut sum: u64 = 0;
-    for data in arr.iter().copied() {
-        sum += ((data + val - 1) / val);
-        if sum > hr {
-            return false;
-        }
-    }
-    if sum <= hr {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-fn solution(len: u64, hr: u64, arr: Vec<u64>) {
-    let sum: u64 = arr
-        .iter()
-        .copied()
-        .reduce(|acc, data| {
-            return acc + data;
-        })
-        .unwrap_or(0);
-
-    let mut end: u64 = sum; // ans
-    let mut start: u64 = 1;
-    let mut ans: u64 = sum;
-    while start < end {
-        let mut mid = (end + start) / 2;
-        if possibleCheck(len, hr, &arr, mid) {
-            ans = mid;
-            end = mid;
-        } else {
+fn find_position(arr: &Vec<u64>, ele: u64) -> usize {
+    let mut start: usize = 0;
+    let mut end: usize = arr.len();
+    while end > start {
+        let mid: usize = start + (end - start) / 2;
+        if arr[mid] <= ele {
             start = mid + 1;
+        } else {
+            end = mid;
         }
     }
-    print!("{}", ans);
+    return start;
 }
+fn solution(len: u64, arr: Vec<u64>) {
+    let mut ans: Vec<u64> = Vec::new();
+    for i in 0..len as usize {
+        if ans.is_empty() || arr[i] > *ans.last().unwrap() {
+            ans.push(arr[i]);
+        } else {
+            let pos: usize = find_position(&ans, arr[i]);
+            if pos >= ans.len() {
+                ans.push(arr[i]);
+            } else {
+                ans[pos] = arr[i];
+            }
+        }
+    }
+    print!("{} ", ans.len());
+    for data in ans.iter() {
+        print!("{} ", data);
+    }
+}
+
 fn input() {
     let mut inp: String = String::new();
     io::stdin().read_line(&mut inp).expect("Input Error");
-    let mut iter = inp.trim().split_whitespace();
-    let (len, hr): (u64, u64) = (
-        iter.next()
-            .expect(" data not founf")
-            .parse()
-            .expect("Parsing Error"),
-        iter.next()
-            .expect(" data not founf")
-            .parse()
-            .expect("Parsing Error"),
-    );
+    let len: u64 = inp.trim().parse().expect("Parsing Error");
     inp.clear();
     io::stdin().read_line(&mut inp).expect("Input Error");
-    let mut arr: Vec<u64> = inp
+    let arr: Vec<u64> = inp
         .trim()
         .split_whitespace()
         .map(|data| data.parse().expect("Parsing error"))
         .collect();
-    arr.sort();
-    solution(len, hr, arr);
+    solution(len, arr);
 }
 fn main() {
     let mut inp: String = String::new();
